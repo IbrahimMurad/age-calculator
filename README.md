@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Age Calculator
 
-## Getting Started
+## Description
 
-First, run the development server:
+This is a simple age calculator that calculates the age of a person based on the date of birth provided. It is built with Next.js and TypeScript.
+
+This project is my first project task for the [CodeAlpha Internship](https://www.codealpha.tech/), a program designed to provide hands-on experience in software development.
+
+## Links
+
+- Repository: [GitHub](https://github.com/IbrahimMurad/age-calculator)
+- Live Site: [Vercel](https://age-calculator-omega-liard.vercel.app/)
+
+## Features
+
+- Calculate age based on date of birth
+- Responsive design
+- Built with Next.js and TypeScript
+- Dark mode
+
+## Technologies
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+
+## Installation
+
+1. Ensure you have Node.js and npm installed. You can download them from [Node.js](https://nodejs.org/).
+
+2. Clone the repository
 
 ```bash
+git clone https://github.com/IbrahimMurad/age-calculator.git
+
+cd age-calculator
+
+npm install
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Start calculating your age!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## License
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project is open source and available under the [MIT License](./LICENSE).
 
-## Learn More
+## Author
 
-To learn more about Next.js, take a look at the following resources:
+Ibrahim Morad
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Email: [ibrahimmorad31@gmail.com](mailto:ibrahimmorad31@gmail.com)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Github: [https://github.com/IbrahimMurad](https://github.com/IbrahimMurad)
+- LinkedIn: [https://www.linkedin.com/in/ibrahim-morad-228410209](https://www.linkedin.com/in/ibrahim-morad-228410209/)
