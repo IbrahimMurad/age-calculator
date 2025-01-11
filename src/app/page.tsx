@@ -1,97 +1,87 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import calculateAge from "./utils/calculateAge";
 
-export default function Home() {
-  const [age, setAge] = useState({ years: 0, months: 0, days: 0 });
-  const [error, setError] = useState("");
-  const [showAge, setShowAge] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
+function DateValue({ dateValue }: { dateValue: number }) {
+  return <span className="text-indigo-500 font-bold">{dateValue}</span>;
+}
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const target = e.target as HTMLFormElement;
-    const birthDate = new Date((target.elements[0] as HTMLInputElement).value);
-    try {
-      setAge(calculateAge(birthDate));
-    } catch (err) {
-      setError((err as Error).message);
-      setShowAge(false);
+export default function Home() {
+  const [error, setError] = useState("");
+  const [showAge, setShowAge] = useState<boolean>(false);
+  const [details, setDetails] = useState<boolean>(false);
+  const [age, setAge] = useState({ years: 0, months: 0, days: 0 });
+  const calculate = (formData: FormData) => {
+    const birthDateValue = formData.get("birthDate")?.toString();
+    if (!birthDateValue) {
+      setError("Please provide a valid birth date.");
       return;
     }
-    setError("");
-    setShowAge(true);
+    const birthDate = new Date(birthDateValue);
+    try {
+      setAge(calculateAge(birthDate));
+      setError("");
+      setShowAge(true);
+    } catch (err) {
+      setShowAge(false);
+      setError((err as Error).message);
+    }
   };
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-slate-900">
-      <main className="flex flex-col gap-8 row-start-2 items-center justify-center w-full">
-        <div className="mt-10 bg-slate-800 rounded-lg shadow-lg p-8 w-full max-w-[40rem]">
-          <h1 className="sm:text-4xl text-3xl text-gray-100 font-bold">
-            Age Calculator
-          </h1>
-          <p className="text-md text-gray-200 mt-4">
-            Calculate your age in years, months, and days.
-          </p>
-          <form
-            className="flex flex-col gap-4 mt-8"
-            onSubmit={(e) => handleSubmit(e)}
+    <main className="grid place-items-center min-h-screen w-full p-2 bg-slate-900">
+      <div className="w-full max-w-[40rem] bg-slate-700 p-8 rounded-lg">
+        <h1 className="text-3xl font-bold">Age Calculator</h1>
+        <p className="mt-4">
+          Calculate you age today by providing you date of birth.
+        </p>
+        <form
+          className="my-8 flex justify-center items-center flex-col"
+          action={calculate}
+        >
+          <input
+            type="date"
+            name="birthDate"
+            required
+            className="w-full rounded-lg bg-slate-500 p-2
+              border-slate-900 border focus:border-2 focus:border-slate-300
+              focus:outline-none my-4
+              "
+          />
+          <button
+            type="submit"
+            className="font-bold text-xl bg-slate-600 p-4 max-w-full w-80 rounded-lg hover:bg-slate-500 hover:border-2 hover:border-slate-700 my-2 h-16"
           >
-            <label className="flex flex-col gap-1">
-              <span className="text-sm text-gray-300 font-bold">
-                Date of Birth
+            Calculate age
+          </button>
+        </form>
+        {error && <p className="text-red-700 font-bold">{error}</p>}
+        {showAge && (
+          <>
+            <div className="flex justify-between items-center mt-4">
+              <h2 className="text-2xl font-bold">Your age</h2>
+              <span
+                className="text-slate-500 underline cursor-pointer"
+                onClick={() => setDetails(!details)}
+              >
+                {details ? "collapse" : "extend"}
               </span>
-              <input
-                type="date"
-                className="rounded-lg border border-black p-2 bg-slate-700 text-gray-100 focus:ring-gray-300 focus:ring-2 focus:outline-none"
-                required
-              />
-            </label>
-            <button
-              type="submit"
-              className="bg-slate-600 text-gray-200 font-bold rounded-lg p-2 focus:ring-gray-300 focus:ring-2 focus:outline-none hover:bg-slate-700 hover:text-gray-100"
-            >
-              Calculate Age
-            </button>
-          </form>
-          {error && <p className="text-red-600 mt-8 font-bold">{error}</p>}
-          {showAge && (
-            <div className="mt-8">
-              <div className="flex justify-between items-center">
-                <h2 className="text-2xl text-gray-100 font-bold">Your Age</h2>
-                <span
-                  className=" text-stone-400 underline cursor-pointer"
-                  onClick={() => setShowDetails(!showDetails)}
-                >
-                  {showDetails ? "hide details" : "show details"}
-                </span>
-              </div>
-              <p className="text-lg text-gray-300 mt-4">
-                You are{" "}
-                <span id="years" className="text-indigo-400 font-bold">
-                  {age.years}
-                </span>{" "}
-                years{" "}
-                {showDetails && (
-                  <>
-                    ,{" "}
-                    <span id="months" className="text-indigo-400 font-bold">
-                      {age.months}
-                    </span>{" "}
-                    months, and{" "}
-                    <span id="days" className="text-indigo-400 font-bold">
-                      {age.days}
-                    </span>{" "}
-                    days
-                  </>
-                )}{" "}
-                old.
-              </p>
             </div>
-          )}
-        </div>
-      </main>
-    </div>
+            <p className="mt-4">
+              You are <DateValue dateValue={age.years} /> years
+              {details && (
+                <>
+                  {" "}
+                  <DateValue dateValue={age.months} /> month, and{" "}
+                  <DateValue dateValue={age.days} /> days
+                </>
+              )}{" "}
+              old.
+            </p>
+          </>
+        )}
+      </div>
+    </main>
   );
 }
