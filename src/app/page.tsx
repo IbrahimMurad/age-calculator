@@ -50,7 +50,7 @@ function ToggleSwitch({
       <span className="mr-2">{isOn ? "Manual Input" : "Date Picker"}</span>
       <div
         className={`w-12 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer ${
-          isOn ? "bg-fuchsia-200" : "bg-gray-300"
+          isOn ? "bg-teal-500" : "bg-gray-300"
         }`}
         onClick={handleToggle}
       >
