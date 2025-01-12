@@ -1,3 +1,15 @@
+/**
+ * Calculates the age based on the given birth date.
+ *
+ * @param {Date} birthDate - The birth date to calculate the age from.
+ * @returns {Object} An object containing the age in years, months, and days.
+ * @throws {Error} Throws an error if the birth date is in the future.
+ *
+ * @example
+ * const birthDate = new Date('1990-01-01');
+ * const age = calculateAge(birthDate);
+ * console.log(age); // { years: 32, months: 9, days: 15 }
+ */
 export default function calculateAge(birthDate: Date) {
   const currentDate = new Date();
   if (birthDate > currentDate) {
